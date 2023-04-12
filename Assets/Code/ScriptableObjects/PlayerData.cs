@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.ScriptableObjects
+namespace Asteroids.ScriptableObjects
 {
     [CreateAssetMenu(menuName = "Player Data", fileName = "PlayerData", order = 52)]
     public class PlayerData : ScriptableObject

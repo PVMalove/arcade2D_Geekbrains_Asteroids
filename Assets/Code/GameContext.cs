@@ -1,26 +1,30 @@
-﻿using Code.Interfaces;
-using Code.ScriptableObjects;
+﻿using System;
+using Asteroids.UI;
 using UnityEngine;
 
-namespace Code
+namespace Asteroids
 {
     public class GameContext : MonoBehaviour
     {
-        [SerializeField] private PlayerData playerData;
-        
-        private IUpdatable _playerController;
+        private GameScene _gameScene;
 
         private void Start()
         {
-            _playerController = new PlayerController(
-                new PlayerModel(playerData),
-                FindObjectOfType<PlayerView>()
-            );
+            var canvas = FindObjectOfType<Canvas>();
+            var ui = new UserInterface(canvas);
+            
+            _gameScene = new GameScene(ui);
+            _gameScene.Start();
         }
 
         private void Update()
         {
-            _playerController.OnUpdate(Time.deltaTime);
+            _gameScene.OnUpdate(Time.deltaTime);
+        }
+
+        private void FixedUpdate()
+        {
+            _gameScene.OnFixedUpdate(Time.deltaTime);
         }
     }
 }
